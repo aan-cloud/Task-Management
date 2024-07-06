@@ -1,10 +1,15 @@
-function App() {
+import Header from "./component/header";
+import Features from "./component/features";
+import Main from "./component/main";
 
+function App() {
   return (
     <>
-     <h1 className="text-black">Farhan</h1>
+      <Header />
+      <Features />
+      <Main />
     </>
-  )
+  );
 }
 
-export default App
+export default App;

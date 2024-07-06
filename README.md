@@ -27,5 +27,3 @@ Some of the main features offered in this application are task search, task filt
 - #### Sort
 
   The sort feature is used to organize tasks into specific characteristics according to the options available in the sort menu.
-
-        Jika ada bug atau error silah kan hubungi kami melalui email pribadi fmuh8402@gmail.com
