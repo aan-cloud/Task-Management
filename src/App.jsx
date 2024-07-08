@@ -8,14 +8,19 @@ function App() {
 
   const [cards, setCards] = useState(datas);
   const [form, setForm] = useState(false);
+  const [title, setTitle] = useState("");
+  const [date, setDate] = useState("");
+  const [status, setStatus] = useState("");
 
   function handleItems() {
-    const same = {
-      title: "validasi akun google",
-      date: "25 june 2003",
-      status: "done",
-    };
-    setCards([...cards, same]);
+    setCards([
+      ...cards,
+      {
+        title: title,
+        date: date,
+        status: status,
+      },
+    ]);
     setForm(false);
   }
 
@@ -28,6 +33,18 @@ function App() {
     setForm(false);
   }
 
+  function handleTitle(value) {
+    setTitle(value);
+  }
+
+  function handleDate(value) {
+    setDate(value);
+  }
+
+  function handleStatus(value) {
+    setStatus(value);
+  }
+
   return (
     <>
       <Header />
@@ -37,6 +54,10 @@ function App() {
         openForm={handleForm}
         form={form}
         closeForm={handleCloseForm}
+        title={handleTitle}
+        date={handleDate}
+        status={handleStatus}
+        valueStatus={status}
       />
       <Main cards={cards} />
     </>

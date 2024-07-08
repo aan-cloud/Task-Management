@@ -4,13 +4,26 @@ export default function Features({
   openForm,
   form,
   closeForm,
+  title,
+  date,
+  status,
+  valueStatus,
 }) {
   function handleform() {
     openForm();
   }
   return (
     <>
-      {form && <Form closeForm={closeForm} onHandleItems={onHandleItems} />}
+      {form && (
+        <Form
+          closeForm={closeForm}
+          onHandleItems={onHandleItems}
+          onHandleTitle={title}
+          onHandleDate={date}
+          onHandleStatus={status}
+          status={valueStatus}
+        />
+      )}
       <section className="flex gap-3 px-[35px]">
         <button
           onClick={handleform}
@@ -114,7 +127,14 @@ export default function Features({
   );
 }
 
-function Form({ closeForm, onHandleItems }) {
+function Form({
+  closeForm,
+  onHandleItems,
+  onHandleTitle,
+  onHandleDate,
+  onHandleStatus,
+  status,
+}) {
   function closeFormes() {
     closeForm();
   }
@@ -122,6 +142,23 @@ function Form({ closeForm, onHandleItems }) {
   function onSubmit() {
     onHandleItems();
   }
+
+  function handleTitle(e) {
+    const value = e.target.value;
+    onHandleTitle(value);
+  }
+
+  function HandleDate(e) {
+    const value = e.target.value;
+    onHandleDate(value);
+  }
+
+  function HandleStatus(e) {
+    const value = e.target.value;
+    console.log(value);
+    onHandleStatus(value);
+  }
+
   return (
     <>
       <div
@@ -139,6 +176,7 @@ function Form({ closeForm, onHandleItems }) {
             id="text"
             className="w-full h-fit mb-6 text-[30px] font-bold border-[rgba(137,137,137,0.5)] border-[2px] pl-2 placeholder:text-[30px] placeholder:text-[#424242] placeholder:font-bold rounded-sm focus:outline-none drop-shadow-md"
             placeholder="New Task"
+            onChange={handleTitle}
           />
           <div id="desc" className="flex justify-between items-center">
             <label htmlFor="description" className="flex gap-2 items-center">
@@ -191,6 +229,7 @@ function Form({ closeForm, onHandleItems }) {
               name="time"
               id="time"
               className="border-[1px] bg-[#D9D9D9] w-[55%] focus:outline-none text-[10px] px-3 py-2 rounded-sm"
+              onChange={HandleDate}
             />
           </div>
 
@@ -219,7 +258,10 @@ function Form({ closeForm, onHandleItems }) {
               name="status"
               id="status"
               className="border-[1px] bg-[#D9D9D9] w-[55%] focus:outline-none text-[10px] px-3 py-2 rounded-sm"
+              value={status}
+              onChange={HandleStatus}
             >
+              <option value="">Choose an option</option>
               <option value="not yet">Not yet</option>
               <option value="on process">On Process</option>
               <option value="done">Done</option>
