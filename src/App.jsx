@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Header from "./component/header";
 import Features from "./component/features";
 import Main from "./component/main";
@@ -12,8 +12,13 @@ function App() {
   const [date, setDate] = useState("");
   const [status, setStatus] = useState("");
 
+  useEffect(() => {
+    const storedTodos = JSON.parse(localStorage.getItem("todos")) || [];
+    setCards(storedTodos);
+  }, []);
+
   function handleItems() {
-    setCards([
+    const newTodos = [
       ...cards,
       {
         title: title,
@@ -21,7 +26,11 @@ function App() {
         status: status,
         id: Date.now(),
       },
-    ]);
+    ];
+    setCards(newTodos);
+
+    localStorage.setItem("todos", JSON.stringify(newTodos));
+
     setForm(false);
   }
 
@@ -47,7 +56,9 @@ function App() {
   }
 
   function handleDeleteItem(id) {
-    setCards((cards) => cards.filter((Delete) => Delete.id !== id));
+    const remove = cards.filter((Delete) => Delete.id !== id);
+    setCards(remove);
+    localStorage.setItem("todos", JSON.stringify(remove));
   }
 
   return (
