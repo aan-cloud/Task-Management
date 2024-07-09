@@ -19,6 +19,7 @@ function App() {
         title: title,
         date: date,
         status: status,
+        id: Date.now(),
       },
     ]);
     setForm(false);
@@ -45,6 +46,10 @@ function App() {
     setStatus(value);
   }
 
+  function handleDeleteItem(id) {
+    setCards((cards) => cards.filter((Delete) => Delete.id !== id));
+  }
+
   return (
     <>
       <Header />
@@ -59,7 +64,7 @@ function App() {
         status={handleStatus}
         valueStatus={status}
       />
-      <Main cards={cards} />
+      <Main cards={cards} onDeleteItem={handleDeleteItem} />
     </>
   );
 }

@@ -1,4 +1,4 @@
-export default function ({ cards }) {
+export default function ({ cards, onDeleteItem }) {
   return (
     <section
       id="main"
@@ -18,7 +18,14 @@ export default function ({ cards }) {
           >
             <div
               id="color"
-              className="w-[12px] h-[15px] bg-orange-500 rounded-tl-sm rounded-bl-sm"
+              className="w-[12px] h-[15px] bg-red-500 rounded-tl-sm rounded-bl-sm"
+              style={
+                card.status === "on process"
+                  ? { backgroundColor: "orange" }
+                  : card.status === "done"
+                  ? { backgroundColor: "green" }
+                  : {}
+              }
             ></div>
             <div id="option" className=" text-[10px] px-[4px] bg-[#B1ABAB] ">
               {card.status}
@@ -44,7 +51,7 @@ export default function ({ cards }) {
                 />
               </svg>
             </button>
-            <button>
+            <button onClick={() => onDeleteItem(card.id)}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"

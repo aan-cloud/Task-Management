@@ -1,6 +1,5 @@
 export default function Features({
   onHandleItems,
-  cards,
   openForm,
   form,
   closeForm,
@@ -8,6 +7,7 @@ export default function Features({
   date,
   status,
   valueStatus,
+  onDeleteItem,
 }) {
   function handleform() {
     openForm();
