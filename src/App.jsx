@@ -1,15 +1,13 @@
 import { useState, useEffect } from "react";
-import Features from "./component/features/features";
-import Main from "./component/main/main";
+import Features from "./component/features";
+import Main from "./component/main";
 
 function App() {
   const [cards, setCards] = useState([]);
   const [form, setForm] = useState(false);
-  const [data, setData] = useState({
-    title: "",
-    date: "",
-    status: "",
-  });
+  const [title, setTitle] = useState("");
+  const [date, setDate] = useState("");
+  const [status, setStatus] = useState("");
   const [editData, setEditData] = useState({});
   const [isVisible, setIsVisible] = useState(false);
 
@@ -22,9 +20,9 @@ function App() {
     const newCard = [
       ...cards,
       {
-        title: data.title,
-        date: data.date,
-        status: data.status,
+        title: title,
+        date: date,
+        status: status,
         id: Date.now(),
       },
     ];
@@ -46,15 +44,15 @@ function App() {
   }
 
   function handleTitle(value) {
-    setData((data) => (data.title = value));
+    setTitle(value);
   }
 
   function handleDate(value) {
-    setData((data) => (data.date = value));
+    setDate(value);
   }
 
   function handleStatus(value) {
-    setData((data) => (data.status = value));
+    setStatus(value);
   }
 
   function handleDeleteItem(id) {
@@ -66,15 +64,15 @@ function App() {
   function handleEdit(card) {
     setForm(true);
     setEditData(card.id);
-    setData((data) => (data.title = card.title));
-    setData((data) => (data.date = card.date));
-    setData((data) => (data.status = card.status));
+    setTitle(card.title);
+    setDate(card.date);
+    setStatus(card.status);
     setIsVisible(true);
   }
 
   function onSaveEdit() {
     const updateCard = cards.map((card) =>
-      card.id === editData ? { ...card, data.title, data.date, data.status } : card
+      card.id === editData ? { ...card, title, date, status } : card
     );
 
     setCards(updateCard);
@@ -99,7 +97,7 @@ function App() {
         title={handleTitle}
         date={handleDate}
         status={handleStatus}
-        valueStatus={data.status}
+        valueStatus={status}
         isVisible={isVisible}
         editData={editData}
         onSaveEdit={onSaveEdit}
