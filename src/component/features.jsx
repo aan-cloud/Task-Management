@@ -8,6 +8,9 @@ export default function Features({
   status,
   valueStatus,
   onDeleteItem,
+  isVisible,
+  editData,
+  onSaveEdit,
 }) {
   function handleform() {
     openForm();
@@ -22,6 +25,9 @@ export default function Features({
           onHandleDate={date}
           onHandleStatus={status}
           status={valueStatus}
+          isVisible={isVisible}
+          editData={editData}
+          onSaveEdit={onSaveEdit}
         />
       )}
       <section className="flex gap-3 px-[35px]">
@@ -133,7 +139,8 @@ function Form({
   onHandleTitle,
   onHandleDate,
   onHandleStatus,
-  status,
+  isVisible,
+  onSaveEdit,
 }) {
   function closeFormes() {
     closeForm();
@@ -258,7 +265,6 @@ function Form({
               name="status"
               id="status"
               className="border-[1px] bg-[#D9D9D9] w-[55%] focus:outline-none text-[10px] px-3 py-2 rounded-sm"
-              value={status}
               onChange={HandleStatus}
             >
               <option value="">Choose an option</option>
@@ -275,12 +281,21 @@ function Form({
           <button className="text-[12px]" onClick={closeFormes}>
             Cancel
           </button>
-          <button
-            onClick={onSubmit}
-            className="text-[12px] font-medium bg-[#0075EA] text-white py-[7px] px-[9px] rounded-md"
-          >
-            Create Task
-          </button>
+          {isVisible ? (
+            <button
+              onClick={() => onSaveEdit()}
+              className="text-[12px] font-medium bg-[#ffd900] text-white py-[7px] px-[9px] rounded-md"
+            >
+              Update Task
+            </button>
+          ) : (
+            <button
+              onClick={onSubmit}
+              className="text-[12px] font-medium bg-[#0075EA] text-white py-[7px] px-[9px] rounded-md"
+            >
+              Create Task
+            </button>
+          )}
         </div>
       </div>
     </>

@@ -1,4 +1,4 @@
-export default function ({ cards, onDeleteItem }) {
+export default function ({ cards, onDeleteItem, handleEdit }) {
   return (
     <section
       id="main"
@@ -35,7 +35,7 @@ export default function ({ cards, onDeleteItem }) {
             <button className="text-[10px] text-white bg-[#0075EA] font-normal py-[7px] px-[10px] w-[80%] rounded-md ">
               See Details
             </button>
-            <button className="p-[4px]">
+            <button className="p-[4px]" onClick={() => handleEdit(card)}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
