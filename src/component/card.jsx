@@ -1,6 +1,6 @@
 export default function Card({ card, handleEdit, onDeleteItem }) {
   return (
-    <div key={i} className="px-[15px] py-[14px] bg-[#dedede]  rounded-md ">
+    <div className="px-[15px] py-[14px] bg-[#dedede]  rounded-md ">
       <h4 id="header" className="text-[14px] font-semibold text-[#424242] ">
         {card.title}
       </h4>

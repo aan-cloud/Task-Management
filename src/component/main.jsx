@@ -6,7 +6,12 @@ export default function ({ cards, onDeleteItem, handleEdit }) {
       className="border-t-[2px] mt-[15px] p-[35px] grid grid-cols-auto-fill-minmax gap-5"
     >
       {cards.map((card, i) => (
-        <Card card={card} handleEdit={handleEdit} onDeleteItem={onDeleteItem} />
+        <Card
+          key={i}
+          card={card}
+          handleEdit={handleEdit}
+          onDeleteItem={onDeleteItem}
+        />
       ))}
     </section>
   );
