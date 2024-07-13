@@ -29,8 +29,7 @@ function App() {
     ];
     setCards(newCard);
 
-    localStorage.setItem("cards", JSON.stringify(newTodos));
-
+    localStorage.setItem("cards", JSON.stringify(newCard));
     setForm(false);
   }
 
@@ -89,19 +88,17 @@ function App() {
           of where your project
         </p>
       </section>
-      <Features openForm={handleForm}>
-        {form && (
-          <Form
-            closeForm={handleCloseForm}
-            onHandleItems={handleItems}
-            title={handleTitle}
-            date={handleDate}
-            status={handleStatus}
-            valueStatus={status}
-            onSaveEdit={onSaveEdit}
-            isVisible={isVisible}
-          />
-        )}
+      <Features openForm={handleForm} form={form}>
+        <Form
+          closeForm={handleCloseForm}
+          onHandleItems={handleItems}
+          title={handleTitle}
+          date={handleDate}
+          status={handleStatus}
+          valueStatus={status}
+          onSaveEdit={onSaveEdit}
+          isVisible={isVisible}
+        />
       </Features>
       <Main
         cards={cards}

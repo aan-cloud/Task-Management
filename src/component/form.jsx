@@ -1,10 +1,10 @@
 export default function Form({
   closeForm,
   onHandleItems,
-  onHandleTitle,
-  onHandleDate,
-  onHandleStatus,
+  title,
+  date,
   status,
+  valueStatus,
   isVisible,
   onSaveEdit,
 }) {
@@ -18,18 +18,18 @@ export default function Form({
 
   function handleTitle(e) {
     const value = e.target.value;
-    onHandleTitle(value);
+    title(value);
   }
 
   function HandleDate(e) {
     const value = e.target.value;
-    onHandleDate(value);
+    date(value);
   }
 
   function HandleStatus(e) {
     const value = e.target.value;
     console.log(value);
-    onHandleStatus(value);
+    status(value);
   }
 
   return (

@@ -1,10 +1,10 @@
-export default function Features({ openForm, children }) {
+export default function Features({ openForm, children, form }) {
   function handleform() {
     openForm();
   }
   return (
     <>
-      {children}
+      {form && children}
       <section className="flex gap-3 px-[35px]">
         <button
           onClick={handleform}
