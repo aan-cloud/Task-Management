@@ -74,8 +74,8 @@ function App() {
     const updateCard = cards.map((card) =>
       card.id === editData ? { ...card, title, date, status } : card
     );
-
     setCards(updateCard);
+    localStorage.setItem("cards", JSON.stringify(updateCard));
     setForm(false);
   }
 

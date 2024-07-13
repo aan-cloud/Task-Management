@@ -1,14 +1,20 @@
+import { useState } from "react";
 export default function Features({ openForm, children, form }) {
+  const [isOpenFilter, setIsOpenFilter] = useState(false);
+  const [isOpenSort, setIsOpenSort] = useState(false);
   function handleform() {
     openForm();
   }
+
   return (
     <>
       {form && children}
+      {isOpenFilter && <Filter isOpen={setIsOpenFilter} />}
+      {isOpenSort && <Sort isOpen={setIsOpenSort} />}
       <section className="flex gap-3 px-[35px]">
         <button
           onClick={handleform}
-          className="text-[11px] font-medium bg-[#0075EA] text-white py-[7px] px-[9px] rounded-md"
+          className="text-[11px] font-medium bg-[#0075EA] text-white py-[7px] px-[9px] rounded-md hover:bg-[#2473c2] transition-all "
         >
           New Task
         </button>
@@ -37,7 +43,12 @@ export default function Features({ openForm, children, form }) {
             className=" w-full bg-transparent text-black outline-none text-[13px]  placeholder:text-[#656565] "
           />
         </div>
-        <div id="filter" className="flex items-center">
+        <button
+          id="filter"
+          className="flex items-center"
+          onMouseOver={() => setIsOpenFilter(true)}
+          onMouseOut={() => setIsOpenFilter(false)}
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -69,8 +80,13 @@ export default function Features({ openForm, children, form }) {
               d="m19.5 8.25-7.5 7.5-7.5-7.5"
             />
           </svg>
-        </div>
-        <div id="sort" className="flex items-center">
+        </button>
+        <button
+          id="sort"
+          className="flex items-center"
+          onMouseOver={() => setIsOpenSort(true)}
+          onMouseOut={() => setIsOpenSort(false)}
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -102,8 +118,47 @@ export default function Features({ openForm, children, form }) {
               d="m19.5 8.25-7.5 7.5-7.5-7.5"
             />
           </svg>
-        </div>
+        </button>
       </section>
     </>
+  );
+}
+
+function Filter({ isOpen }) {
+  return (
+    <div
+      id="filter"
+      className="w-[100px] h-[89px] border rounded-md px-4 bg-[#ebebeb] shadow-md gap-1 absolute left-[23%] top-[25%] flex flex-col items-center justify-center transition-all"
+      onMouseOver={() => isOpen(true)}
+      onMouseOut={() => isOpen(false)}
+    >
+      <button className="w-full border-l-4 border-[#F7093B]  text-[11px] text-[#424242] font-semibold ">
+        To Do
+      </button>
+      <button className="w-full border-l-4 border-[#FFA732] text-[11px] text-[#424242] font-semibold ">
+        Procces
+      </button>
+      <button className="w-full border-l-4 border-[#00CB7D] text-[11px] text-[#424242] font-semibold ">
+        Done
+      </button>
+    </div>
+  );
+}
+
+function Sort({ isOpen }) {
+  return (
+    <div
+      id="filter"
+      className="w-[100px] h-[60px] border rounded-md px-4 bg-[#ebebeb] shadow-md gap-1 absolute left-[30%] top-[25%] flex flex-col items-center justify-center transition-all"
+      onMouseOver={() => isOpen(true)}
+      onMouseOut={() => isOpen(false)}
+    >
+      <button className="w-full border-l-4 border-[#00CB7D] text-[11px] text-[#424242] font-semibold ">
+        A - Z
+      </button>
+      <button className="w-full border-l-4 border-[#F7093B] text-[11px] text-[#424242] font-semibold ">
+        Reverse
+      </button>
+    </div>
   );
 }

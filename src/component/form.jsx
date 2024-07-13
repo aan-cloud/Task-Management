@@ -47,7 +47,7 @@ export default function Form({
             type="text"
             name="text"
             id="text"
-            className="w-full h-fit mb-6 text-[30px] font-bold border-[rgba(137,137,137,0.5)] border-[2px] pl-2 placeholder:text-[30px] placeholder:text-[#424242] placeholder:font-bold rounded-sm focus:outline-none drop-shadow-md"
+            className="w-full h-fit mb-6 text-[30px] font-bold border-[rgba(137,137,137,0.5)] border-[2px] pl-2 placeholder:text-[30px]  placeholder:font-bold rounded-sm focus:outline-none drop-shadow-md"
             placeholder="New Task"
             onChange={handleTitle}
           />
