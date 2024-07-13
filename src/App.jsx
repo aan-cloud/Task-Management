@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import Features from "./component/features";
 import Main from "./component/main";
+import Form from "./component/form";
 
 function App() {
   const [cards, setCards] = useState([]);
@@ -88,20 +89,20 @@ function App() {
           of where your project
         </p>
       </section>
-      <Features
-        cards={cards}
-        onHandleItems={handleItems}
-        openForm={handleForm}
-        form={form}
-        closeForm={handleCloseForm}
-        title={handleTitle}
-        date={handleDate}
-        status={handleStatus}
-        valueStatus={status}
-        isVisible={isVisible}
-        editData={editData}
-        onSaveEdit={onSaveEdit}
-      />
+      <Features openForm={handleForm}>
+        {form && (
+          <Form
+            closeForm={handleCloseForm}
+            onHandleItems={handleItems}
+            title={handleTitle}
+            date={handleDate}
+            status={handleStatus}
+            valueStatus={status}
+            onSaveEdit={onSaveEdit}
+            isVisible={isVisible}
+          />
+        )}
+      </Features>
       <Main
         cards={cards}
         onDeleteItem={handleDeleteItem}
