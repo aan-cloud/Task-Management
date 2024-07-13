@@ -98,7 +98,6 @@ export default function Form({
               <small className="text-[15px] text-[#656565]">Time</small>
             </label>
             <input
-              type="text"
               name="time"
               id="time"
               className="border-[1px] bg-[#D9D9D9] w-[55%] focus:outline-none text-[10px] px-3 py-2 rounded-sm"

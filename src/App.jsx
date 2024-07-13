@@ -13,7 +13,7 @@ function App() {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    const storedTodos = JSON.parse(localStorage.getItem("todos")) || [];
+    const storedTodos = JSON.parse(localStorage.getItem("cards")) || [];
     setCards(storedTodos);
   }, []);
 
