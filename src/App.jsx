@@ -95,7 +95,6 @@ function App() {
           title={handleTitle}
           date={handleDate}
           status={handleStatus}
-          valueStatus={status}
           onSaveEdit={onSaveEdit}
           isVisible={isVisible}
         />

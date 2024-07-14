@@ -4,34 +4,9 @@ export default function Form({
   title,
   date,
   status,
-  valueStatus,
   isVisible,
   onSaveEdit,
 }) {
-  function closeFormes() {
-    closeForm();
-  }
-
-  function onSubmit() {
-    onHandleItems();
-  }
-
-  function handleTitle(e) {
-    const value = e.target.value;
-    title(value);
-  }
-
-  function HandleDate(e) {
-    const value = e.target.value;
-    date(value);
-  }
-
-  function HandleStatus(e) {
-    const value = e.target.value;
-    console.log(value);
-    status(value);
-  }
-
   return (
     <>
       <div
@@ -49,7 +24,7 @@ export default function Form({
             id="text"
             className="w-full h-fit mb-6 text-[30px] font-bold pl-3 placeholder:text-[30px] placeholder:text-[rgb(116,116,116)] border-[1px] border-[#3E3C3C] placeholder:font-bold rounded-sm focus:outline-none drop-shadow-md"
             placeholder="New Task"
-            onChange={handleTitle}
+            onChange={(e) => title(e.target.value)}
           />
           <div id="desc" className="flex justify-between items-center">
             <label htmlFor="description" className="flex gap-2 items-center">
@@ -101,7 +76,7 @@ export default function Form({
               name="time"
               id="time"
               className="border-[1px] bg-[#D9D9D9] w-[55%] focus:outline-none text-[10px] px-3 py-2 rounded-sm"
-              onChange={HandleDate}
+              onChange={(e) => date(e.target.value)}
             />
           </div>
 
@@ -130,8 +105,7 @@ export default function Form({
               name="status"
               id="status"
               className="border-[1px] bg-[#D9D9D9] w-[55%] focus:outline-none text-[10px] px-3 py-2 rounded-sm"
-              value={status}
-              onChange={HandleStatus}
+              onChange={(e) => status(e.target.value)}
             >
               <option value="">Choose an option</option>
               <option value="not yet">Not yet</option>
@@ -144,19 +118,19 @@ export default function Form({
           id="bottom"
           className="p-4 pt-3 mt-[12px] border-t-[2px] border-t-[#BABABA] flex justify-end gap-3"
         >
-          <button className="text-[12px]" onClick={closeFormes}>
+          <button className="text-[12px]" onClick={closeForm}>
             Cancel
           </button>
           {isVisible ? (
             <button
-              onClick={() => onSaveEdit()}
+              onClick={onSaveEdit}
               className="text-[12px] font-medium bg-[#f0840a] text-white py-[7px] px-[9px] rounded-md"
             >
               Update
             </button>
           ) : (
             <button
-              onClick={onSubmit}
+              onClick={onHandleItems}
               className="text-[12px] font-medium bg-[#0075EA] text-white py-[7px] px-[9px] rounded-md"
             >
               Create Task
