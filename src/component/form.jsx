@@ -40,14 +40,14 @@ export default function Form({
       ></div>
       <div
         id="form"
-        className=" z-30 border-[1px] border-[#7d7d7d]  bg-[#ffffff] absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-sm"
+        className=" z-30 border-[1px] border-[#7d7d7d] bg-white absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-sm"
       >
         <div id="top" className="px-12 py-7">
           <input
             type="text"
             name="text"
             id="text"
-            className="w-full h-fit mb-6 text-[30px] font-bold border-[rgba(137,137,137,0.5)] border-[2px] pl-2 placeholder:text-[30px]  placeholder:font-bold rounded-sm focus:outline-none drop-shadow-md"
+            className="w-full h-fit mb-6 text-[30px] font-bold pl-3 placeholder:text-[30px] placeholder:text-[rgb(116,116,116)] border-[1px] border-[#3E3C3C] placeholder:font-bold rounded-sm focus:outline-none drop-shadow-md"
             placeholder="New Task"
             onChange={handleTitle}
           />
