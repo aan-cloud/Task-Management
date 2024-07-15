@@ -12,7 +12,7 @@ Below, some other important information about this project will be displayed.
 
 ### Author
 
-Created and developed by [Muhammad Farhan](), a member of [Bearmentor Bootcamp]() and an Information of technology student.
+Created and developed by [Muhammad Farhan](), a member of [Bearmentor Bootcamp](http://bearmentor.com) and an Information of technology student.
 
 ### Features
 
