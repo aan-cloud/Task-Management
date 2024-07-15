@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
+
 export default function Features({ openForm, children, form }) {
   const [isOpenFilter, setIsOpenFilter] = useState(false);
   const [isOpenSort, setIsOpenSort] = useState(false);
@@ -11,12 +13,13 @@ export default function Features({ openForm, children, form }) {
     <>
       {form && children}
       <section className="flex gap-3 px-[35px]">
-        <button
+        <Link
+          to="/new"
           onClick={handleform}
           className="text-[14px] font-medium bg-[#0075EA] text-white py-[8px] px-[10px] rounded-md hover:bg-[#2473c2] transition-all "
         >
           New Task
-        </button>
+        </Link>
         <div
           id="input"
           className="border-[1px] focus-within:ring-2 rounded-md border-[#BABABA] w-[200px] flex items-center px-[5px] shadow-sm "
