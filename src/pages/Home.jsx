@@ -14,6 +14,7 @@ export default function Home() {
   const [editData, setEditData] = useState({});
   const [isVisible, setIsVisible] = useState(false);
   const [isOpenCard, setIsOpenCard] = useState(false);
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
     const storedTodos = JSON.parse(localStorage.getItem("cards")) || [];
@@ -104,9 +105,11 @@ export default function Home() {
   }
 
   function handleSearch(value) {
-    setCards((cards) => cards.filter((card) => card.title.includes(value)));
+    setSearch(value);
     console.log(value);
   }
+
+  const filteredCards = cards.filter((card) => card.title.includes(search));
 
   return (
     <>
@@ -140,7 +143,7 @@ export default function Home() {
       </Features>
       <Main
         openCard={openCard}
-        cards={cards}
+        cards={filteredCards}
         onDeleteItem={handleDeleteItem}
         handleEdit={handleEdit}
       />
