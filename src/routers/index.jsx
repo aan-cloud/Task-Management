@@ -8,7 +8,6 @@ export const router = createBrowserRouter([
     children: [
       {
         path: "/edit",
-        elemen: <Home />,
       },
     ],
   },
