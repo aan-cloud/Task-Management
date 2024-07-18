@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-export default function Card({ card, handleEdit, onDeleteItem }) {
+export default function Card({ card, handleEdit, onDeleteItem, openCard }) {
   return (
     <div className="px-[15px] py-[14px] border-[1px] rounded-md  bg-[#d8d8d8] border-[#b1b1b1] hover:scale-105 transition-all">
       <h4 id="header" className="text-[18px] font-bold text-[#424242] ">
@@ -26,7 +26,10 @@ export default function Card({ card, handleEdit, onDeleteItem }) {
         </div>
       </div>
       <div id="foot" className="flex items-center gap-2">
-        <button className="text-[12px] text-white bg-[#0075EA] font-normal hover:bg-[#2473c2] transition-all py-[7px] px-[10px] w-[80%] rounded-md ">
+        <button
+          onClick={() => openCard(card)}
+          className="text-[12px] text-white bg-[#0075EA] font-normal hover:bg-[#2473c2] transition-all py-[7px] px-[10px] w-[80%] rounded-md "
+        >
           See Details
         </button>
         <Link to="/edit" className="p-[4px]" onClick={() => handleEdit(card)}>

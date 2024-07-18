@@ -4,6 +4,7 @@ export default function Form({
   closeForm,
   onHandleItems,
   title,
+  description,
   date,
   status,
   isVisible,
@@ -19,6 +20,7 @@ export default function Form({
         closeForm={closeForm}
         onHandleItems={onHandleItems}
         title={title}
+        description={description}
         date={date}
         status={status}
         isVisible={isVisible}
@@ -32,6 +34,7 @@ export function Input({
   closeForm,
   onHandleItems,
   title,
+  description,
   date,
   status,
   isVisible,
@@ -40,9 +43,9 @@ export function Input({
   return (
     <div
       id="form"
-      className=" z-30 border-[1px] border-[#7d7d7d] bg-white absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-sm"
+      className="z-30 border-[1px] border-[#7d7d7d] bg-white absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-sm"
     >
-      <div id="top" className="px-12 py-7">
+      <div id="top" className="px-12 py-10">
         <input
           type="text"
           name="text"
@@ -70,6 +73,7 @@ export function Input({
             <small className="text-[15px] text-[#656565] ">Description</small>
           </label>
           <textarea
+            onChange={(e) => description(e.target.value)}
             type="text"
             name="description"
             id="description"

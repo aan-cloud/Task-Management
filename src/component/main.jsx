@@ -1,6 +1,6 @@
 import Cards from "./Cards";
 
-export default function ({ cards, onDeleteItem, handleEdit }) {
+export default function ({ cards, onDeleteItem, handleEdit, openCard }) {
   return (
     <section
       id="main"
@@ -12,6 +12,7 @@ export default function ({ cards, onDeleteItem, handleEdit }) {
           card={card}
           handleEdit={handleEdit}
           onDeleteItem={onDeleteItem}
+          openCard={openCard}
         />
       ))}
     </section>

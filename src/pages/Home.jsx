@@ -8,10 +8,12 @@ export default function Home() {
   const [cards, setCards] = useState([]);
   const [form, setForm] = useState(false);
   const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
   const [date, setDate] = useState("");
   const [status, setStatus] = useState("");
   const [editData, setEditData] = useState({});
   const [isVisible, setIsVisible] = useState(false);
+  const [isOpenCard, setIsOpenCard] = useState(false);
 
   useEffect(() => {
     const storedTodos = JSON.parse(localStorage.getItem("cards")) || [];
@@ -23,6 +25,7 @@ export default function Home() {
       ...cards,
       {
         title: title,
+        description: description,
         date: date,
         status: status,
         id: Date.now(),
@@ -32,6 +35,7 @@ export default function Home() {
 
     localStorage.setItem("cards", JSON.stringify(newCard));
     setForm(false);
+    console.log(dataCards);
   }
 
   function handleForm() {
@@ -46,6 +50,10 @@ export default function Home() {
 
   function handleTitle(value) {
     setTitle(value);
+  }
+
+  function handleDescription(value) {
+    setDescription(value);
   }
 
   function handleDate(value) {
@@ -66,6 +74,7 @@ export default function Home() {
     setForm(true);
     setEditData(card.id);
     setTitle(card.title);
+    setDescription(card.description);
     setDate(card.date);
     setStatus(card.status);
     setIsVisible(true);
@@ -73,12 +82,32 @@ export default function Home() {
 
   function onSaveEdit() {
     const updateCard = cards.map((card) =>
-      card.id === editData ? { ...card, title, date, status } : card
+      card.id === editData
+        ? { ...card, title, description, date, status }
+        : card
     );
     setCards(updateCard);
     localStorage.setItem("cards", JSON.stringify(updateCard));
     setForm(false);
   }
+
+  function openCard(card) {
+    setIsOpenCard(true);
+    setTitle(card.title);
+    setDescription(card.description);
+    setDate(card.date);
+    setStatus(card.status);
+  }
+
+  function closeCard() {
+    setIsOpenCard(false);
+  }
+
+  function handleSearch(value) {
+    setCards((cards) => cards.filter((card) => card.title.includes(value)));
+    console.log(value);
+  }
+
   return (
     <>
       <section className="p-[35px] pt-[30px] pb-[14px] w-full text-[#3E3C3C]">
@@ -88,12 +117,21 @@ export default function Home() {
           of where your project
         </p>
       </section>
-      <Card />
-      <Features openForm={handleForm} form={form}>
+      {isOpenCard && (
+        <Card
+          closeCard={closeCard}
+          title={title}
+          description={description}
+          date={date}
+          status={status}
+        />
+      )}
+      <Features openForm={handleForm} form={form} handleSearch={handleSearch}>
         <Form
           closeForm={handleCloseForm}
           onHandleItems={handleItems}
           title={handleTitle}
+          description={handleDescription}
           date={handleDate}
           status={handleStatus}
           onSaveEdit={onSaveEdit}
@@ -101,6 +139,7 @@ export default function Home() {
         />
       </Features>
       <Main
+        openCard={openCard}
         cards={cards}
         onDeleteItem={handleDeleteItem}
         handleEdit={handleEdit}

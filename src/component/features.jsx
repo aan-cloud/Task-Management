@@ -1,12 +1,17 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-export default function Features({ openForm, children, form }) {
+export default function Features({ openForm, children, form, handleSearch }) {
   const [isOpenFilter, setIsOpenFilter] = useState(false);
   const [isOpenSort, setIsOpenSort] = useState(false);
+  const [valueSearch, setValueSearch] = useState("");
 
   function handleform() {
     openForm();
+  }
+
+  function handleValueSearch(e) {
+    e.key === "Enter" && handleSearch(valueSearch);
   }
 
   return (
@@ -40,6 +45,8 @@ export default function Features({ openForm, children, form }) {
           </svg>
 
           <input
+            onChange={(e) => setValueSearch(e.target.value)}
+            onKeyDown={handleValueSearch}
             type="search"
             placeholder="Search"
             className=" w-full bg-transparent text-black outline-none text-[13px]  placeholder:text-[#656565] "
