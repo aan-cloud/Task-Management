@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
-import Features from "../component/features";
-import Main from "../component/main";
-import Form from "../component/form";
-import { Outlet } from "react-router-dom";
+import Features from "../component/Features";
+import Main from "../component/Main";
+import Form from "../component/Form";
+import Card from "../component/Card";
 
 export default function Home() {
   const [cards, setCards] = useState([]);
@@ -88,6 +88,7 @@ export default function Home() {
           of where your project
         </p>
       </section>
+      <Card />
       <Features openForm={handleForm} form={form}>
         <Form
           closeForm={handleCloseForm}
@@ -104,7 +105,6 @@ export default function Home() {
         onDeleteItem={handleDeleteItem}
         handleEdit={handleEdit}
       />
-      <Outlet />
     </>
   );
 }

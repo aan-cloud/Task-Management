@@ -1,4 +1,5 @@
-import Card from "./card";
+import Cards from "./Cards";
+
 export default function ({ cards, onDeleteItem, handleEdit }) {
   return (
     <section
@@ -6,7 +7,7 @@ export default function ({ cards, onDeleteItem, handleEdit }) {
       className="border-t-[2px] mt-[15px] px-[35px] py-[30px] grid grid-cols-auto-fill-minmax gap-5"
     >
       {cards.map((card, i) => (
-        <Card
+        <Cards
           key={i}
           card={card}
           handleEdit={handleEdit}
