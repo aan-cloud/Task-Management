@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
-import Features from "../component/Features";
-import Main from "../component/Main";
-import Form from "../component/Form";
-import Card from "../component/Card";
+import Features from "../component/features";
+import Main from "../component/main";
+import Form from "../component/form";
+import Card from "../component/card";
 
 export default function Home() {
   const [cards, setCards] = useState([]);
