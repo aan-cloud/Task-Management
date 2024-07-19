@@ -7,6 +7,7 @@ export default function Features({
   form,
   handleSearch,
   handleFilter,
+  handleSort,
 }) {
   const [isOpenFilter, setIsOpenFilter] = useState(false);
   const [isOpenSort, setIsOpenSort] = useState(false);
@@ -140,7 +141,9 @@ export default function Features({
               />
             </svg>
           </div>
-          {isOpenSort && <Sort isOpen={setIsOpenSort} />}
+          {isOpenSort && (
+            <Sort isOpen={setIsOpenSort} handleSort={handleSort} />
+          )}
         </div>
       </section>
     </>
@@ -159,7 +162,7 @@ function Filter({ handleFilter }) {
           handleFilter(e.target.dataset.value);
         }}
         data-value="Default"
-        className="w-full border-l-4 border-[#696969]  text-[11px] text-[#424242] font-semibold "
+        className="w-full border-l-4 border-[#696969]  text-[11px] text-[#424242] font-semibold hover:bg-slate-300"
       >
         Default
       </button>
@@ -169,7 +172,7 @@ function Filter({ handleFilter }) {
           handleFilter(e.target.dataset.value);
         }}
         data-value="Not Yet"
-        className="w-full border-l-4 border-[#F7093B]  text-[11px] text-[#424242] font-semibold "
+        className="w-full border-l-4 border-[#F7093B]  text-[11px] text-[#424242] font-semibold hover:bg-slate-300"
       >
         Not Yet
       </button>
@@ -179,7 +182,7 @@ function Filter({ handleFilter }) {
           handleFilter(e.target.dataset.value);
         }}
         data-value="Process"
-        className="w-full border-l-4 border-[#FFA732] text-[11px] text-[#424242] font-semibold "
+        className="w-full border-l-4 border-[#FFA732] text-[11px] text-[#424242] font-semibold hover:bg-slate-300"
       >
         Process
       </button>
@@ -189,7 +192,7 @@ function Filter({ handleFilter }) {
           handleFilter(e.target.dataset.value);
         }}
         data-value="Done"
-        className="w-full border-l-4 border-[#00CB7D] text-[11px] text-[#424242] font-semibold "
+        className="w-full border-l-4 border-[#00CB7D] text-[11px] text-[#424242] font-semibold hover:bg-slate-300"
       >
         Done
       </button>
@@ -197,19 +200,43 @@ function Filter({ handleFilter }) {
   );
 }
 
-function Sort({ isOpen }) {
+function Sort({ isOpen, handleSort }) {
   return (
     <div
       id="filter"
-      className="w-[100px] h-[60px] border rounded-md px-4 bg-[#ebebeb] fixed top-[186px] z-20 shadow-md gap-1  flex flex-col items-center justify-center transition-all"
+      className="w-[100px] h-[80px] border rounded-md px-4 bg-[#ebebeb] fixed top-[186px] z-20 shadow-md gap-1  flex flex-col items-center justify-center transition-all"
       onMouseOver={() => isOpen(true)}
       onMouseOut={() => isOpen(false)}
     >
-      <button className="w-full border-l-4 border-[#00CB7D] text-[11px] text-[#424242] font-semibold ">
+      <button
+        className="w-full border-l-4 border-[#797979] text-[11px] text-[#424242] font-semibold hover:bg-slate-300 "
+        data-value="Default"
+        onClick={(e) => {
+          e.stopPropagation();
+          handleSort(e.target.dataset.value);
+        }}
+      >
+        Default
+      </button>
+      <button
+        className="w-full border-l-4 border-[#00CB7D] text-[11px] text-[#424242] font-semibold hover:bg-slate-300 "
+        data-value="A - Z"
+        onClick={(e) => {
+          e.stopPropagation();
+          handleSort(e.target.dataset.value);
+        }}
+      >
         A - Z
       </button>
-      <button className="w-full border-l-4 border-[#F7093B] text-[11px] text-[#424242] font-semibold ">
-        Reverse
+      <button
+        className="w-full border-l-4 border-[#F7093B] text-[11px] text-[#424242] font-semibold hover:bg-slate-300 "
+        data-value="Z - A"
+        onClick={(e) => {
+          e.stopPropagation();
+          handleSort(e.target.dataset.value);
+        }}
+      >
+        Z - A
       </button>
     </div>
   );

@@ -3,6 +3,7 @@ import Features from "../component/features";
 import Main from "../component/main";
 import Form from "../component/form";
 import Card from "../component/card";
+import { useAsyncError } from "react-router-dom";
 
 export default function Home() {
   const [cards, setCards] = useState([]);
@@ -16,6 +17,7 @@ export default function Home() {
   const [isOpenCard, setIsOpenCard] = useState(false);
   const [search, setSearch] = useState("");
   const [filter, SetFilter] = useState("");
+  const [sort, setSort] = useState("");
 
   useEffect(() => {
     const storedTodos = JSON.parse(localStorage.getItem("cards")) || [];
@@ -111,18 +113,30 @@ export default function Home() {
 
   function handleFilter(value) {
     SetFilter(value);
+  }
+
+  function handleSort(value) {
+    setSort(value);
     console.log(value);
   }
 
-  const filteredAndSortedCards = cards.filter((card) =>
-    filter === "Not Yet"
-      ? card.status === "not yet"
-      : filter === "Process"
-      ? card.status === "on process"
-      : filter === "Done"
-      ? card.status === "done"
-      : card.title.includes(search)
-  );
+  const filteredAndSortedCards = cards
+    .filter((card) =>
+      filter === "Not Yet"
+        ? card.status === "not yet"
+        : filter === "Process"
+        ? card.status === "on process"
+        : filter === "Done"
+        ? card.status === "done"
+        : card.title.includes(search)
+    )
+    .sort((a, b) =>
+      sort === "A - Z"
+        ? a.title.localeCompare(b.title)
+        : sort === "Z - A"
+        ? b.title.localeCompare(a.title)
+        : 0
+    );
 
   return (
     <>
@@ -147,6 +161,7 @@ export default function Home() {
         form={form}
         handleSearch={handleSearch}
         handleFilter={handleFilter}
+        handleSort={handleSort}
       >
         <Form
           closeForm={handleCloseForm}
