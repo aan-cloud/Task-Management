@@ -1,7 +1,13 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-export default function Features({ openForm, children, form, handleSearch }) {
+export default function Features({
+  openForm,
+  children,
+  form,
+  handleSearch,
+  handleFilter,
+}) {
   const [isOpenFilter, setIsOpenFilter] = useState(false);
   const [isOpenSort, setIsOpenSort] = useState(false);
   const [valueSearch, setValueSearch] = useState("");
@@ -52,7 +58,7 @@ export default function Features({ openForm, children, form, handleSearch }) {
             className=" w-full bg-transparent text-black outline-none text-[13px]  placeholder:text-[#656565] "
           />
         </div>
-        <button
+        <div
           id="filter"
           className="flex items-center flex-col justify-center"
           onMouseOver={() => setIsOpenFilter(true)}
@@ -91,9 +97,11 @@ export default function Features({ openForm, children, form, handleSearch }) {
               />
             </svg>
           </div>
-          {isOpenFilter && <Filter isOpen={setIsOpenFilter} />}
-        </button>
-        <button
+          {isOpenFilter && (
+            <Filter isOpen={setIsOpenFilter} handleFilter={handleFilter} />
+          )}
+        </div>
+        <div
           id="sort"
           className="flex items-center justify-center"
           onMouseOver={() => setIsOpenSort(true)}
@@ -133,27 +141,56 @@ export default function Features({ openForm, children, form, handleSearch }) {
             </svg>
           </div>
           {isOpenSort && <Sort isOpen={setIsOpenSort} />}
-        </button>
+        </div>
       </section>
     </>
   );
 }
 
-function Filter({ isOpen }) {
+function Filter({ handleFilter }) {
   return (
     <div
       id="filter"
-      className="w-[100px] h-[89px] border rounded-md px-4 fixed top-[186px] z-20 bg-[#ebebeb] shadow-md gap-1 flex flex-col items-center justify-center transition-all"
-      onMouseOver={() => isOpen(true)}
-      onMouseOut={() => isOpen(false)}
+      className="w-[100px] h-[110px] border rounded-md px-4 fixed top-[186px] z-20 bg-[#ebebeb] shadow-md gap-1 flex flex-col items-center justify-center transition-all"
     >
-      <button className="w-full border-l-4 border-[#F7093B]  text-[11px] text-[#424242] font-semibold ">
-        To Do
+      <button
+        onClick={(e) => {
+          e.stopPropagation();
+          handleFilter(e.target.dataset.value);
+        }}
+        data-value="Default"
+        className="w-full border-l-4 border-[#696969]  text-[11px] text-[#424242] font-semibold "
+      >
+        Default
       </button>
-      <button className="w-full border-l-4 border-[#FFA732] text-[11px] text-[#424242] font-semibold ">
-        Procces
+      <button
+        onClick={(e) => {
+          e.stopPropagation();
+          handleFilter(e.target.dataset.value);
+        }}
+        data-value="Not Yet"
+        className="w-full border-l-4 border-[#F7093B]  text-[11px] text-[#424242] font-semibold "
+      >
+        Not Yet
       </button>
-      <button className="w-full border-l-4 border-[#00CB7D] text-[11px] text-[#424242] font-semibold ">
+      <button
+        onClick={(e) => {
+          e.stopPropagation();
+          handleFilter(e.target.dataset.value);
+        }}
+        data-value="Process"
+        className="w-full border-l-4 border-[#FFA732] text-[11px] text-[#424242] font-semibold "
+      >
+        Process
+      </button>
+      <button
+        onClick={(e) => {
+          e.stopPropagation();
+          handleFilter(e.target.dataset.value);
+        }}
+        data-value="Done"
+        className="w-full border-l-4 border-[#00CB7D] text-[11px] text-[#424242] font-semibold "
+      >
         Done
       </button>
     </div>

@@ -15,6 +15,7 @@ export default function Home() {
   const [isVisible, setIsVisible] = useState(false);
   const [isOpenCard, setIsOpenCard] = useState(false);
   const [search, setSearch] = useState("");
+  const [filter, SetFilter] = useState("");
 
   useEffect(() => {
     const storedTodos = JSON.parse(localStorage.getItem("cards")) || [];
@@ -106,10 +107,22 @@ export default function Home() {
 
   function handleSearch(value) {
     setSearch(value);
+  }
+
+  function handleFilter(value) {
+    SetFilter(value);
     console.log(value);
   }
 
-  const filteredCards = cards.filter((card) => card.title.includes(search));
+  const filteredAndSortedCards = cards.filter((card) =>
+    filter === "Not Yet"
+      ? card.status === "not yet"
+      : filter === "Process"
+      ? card.status === "on process"
+      : filter === "Done"
+      ? card.status === "done"
+      : card.title.includes(search)
+  );
 
   return (
     <>
@@ -129,7 +142,12 @@ export default function Home() {
           status={status}
         />
       )}
-      <Features openForm={handleForm} form={form} handleSearch={handleSearch}>
+      <Features
+        openForm={handleForm}
+        form={form}
+        handleSearch={handleSearch}
+        handleFilter={handleFilter}
+      >
         <Form
           closeForm={handleCloseForm}
           onHandleItems={handleItems}
@@ -143,7 +161,7 @@ export default function Home() {
       </Features>
       <Main
         openCard={openCard}
-        cards={filteredCards}
+        cards={filteredAndSortedCards}
         onDeleteItem={handleDeleteItem}
         handleEdit={handleEdit}
       />
