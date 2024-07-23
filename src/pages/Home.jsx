@@ -5,6 +5,13 @@ import Form from "../component/form";
 import Card from "../component/card";
 import { useAsyncError } from "react-router-dom";
 
+export const CardStatus = {
+  DEFAULT: "default",
+  NOT_YET: "not yet",
+  ON_PROCESS: "on process",
+  DONE: "done",
+};
+
 export default function Home() {
   const [cards, setCards] = useState([]);
   const [form, setForm] = useState(false);
@@ -16,8 +23,8 @@ export default function Home() {
   const [isVisible, setIsVisible] = useState(false);
   const [isOpenCard, setIsOpenCard] = useState(false);
   const [search, setSearch] = useState("");
-  const [filter, SetFilter] = useState("");
-  const [sort, setSort] = useState("");
+  const [selectedFilter, SetSelectedFilter] = useState("");
+  const [selectedSort, setSelectedSort] = useState("");
 
   useEffect(() => {
     const storedTodos = JSON.parse(localStorage.getItem("cards")) || [];
@@ -112,23 +119,20 @@ export default function Home() {
   }
 
   function handleFilter(value) {
-    SetFilter(value);
+    SetSelectedFilter(value);
   }
 
   function handleSort(value) {
-    setSort(value);
+    setSelectedSort(value);
     console.log(value);
   }
 
   const filteredAndSortedCards = cards
-    .filter((card) =>
-      filter === "Not Yet"
-        ? card.status === "not yet"
-        : filter === "Process"
-        ? card.status === "on process"
-        : filter === "Done"
-        ? card.status === "done"
-        : card.title.includes(search)
+    .filter(
+      (card) =>
+        card.title.includes(search) &&
+        (selectedFilter === CardStatus.DEFAULT ||
+          selectedFilter === card.status)
     )
     .sort((a, b) =>
       sort === "A - Z"

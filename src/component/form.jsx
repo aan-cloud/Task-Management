@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { CardStatus } from "../pages/Home";
 
 export default function Form({
   closeForm,
@@ -136,10 +137,10 @@ export function Input({
             className="border-[1px] bg-[#D9D9D9] w-[55%] focus:outline-none text-[10px] px-3 py-2 rounded-sm"
             onChange={(e) => status(e.target.value)}
           >
-            <option value="">Choose an option</option>
-            <option value="not yet">Not yet</option>
-            <option value="on process">On Process</option>
-            <option value="done">Done</option>
+            <option value={CardStatus.DEFAULT}>Choose an option</option>
+            <option value={CardStatus.NOT_YET}>Not yet</option>
+            <option value={CardStatus.ON_PROCESS}>On Process</option>
+            <option value={CardStatus.DONE}>Done</option>
           </select>
         </div>
       </div>

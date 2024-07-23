@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { CardStatus } from "../pages/Home";
 
 export default function Features({
   openForm,
@@ -161,7 +162,7 @@ function Filter({ handleFilter }) {
           e.stopPropagation();
           handleFilter(e.target.dataset.value);
         }}
-        data-value="Default"
+        data-value={CardStatus.DEFAULT}
         className="w-full border-l-4 border-[#696969]  text-[11px] text-[#424242] font-semibold hover:bg-slate-300"
       >
         Default
@@ -171,7 +172,7 @@ function Filter({ handleFilter }) {
           e.stopPropagation();
           handleFilter(e.target.dataset.value);
         }}
-        data-value="Not Yet"
+        data-value={CardStatus.NOT_YET}
         className="w-full border-l-4 border-[#F7093B]  text-[11px] text-[#424242] font-semibold hover:bg-slate-300"
       >
         Not Yet
@@ -181,7 +182,7 @@ function Filter({ handleFilter }) {
           e.stopPropagation();
           handleFilter(e.target.dataset.value);
         }}
-        data-value="Process"
+        data-value={CardStatus.ON_PROCESS}
         className="w-full border-l-4 border-[#FFA732] text-[11px] text-[#424242] font-semibold hover:bg-slate-300"
       >
         Process
@@ -191,7 +192,7 @@ function Filter({ handleFilter }) {
           e.stopPropagation();
           handleFilter(e.target.dataset.value);
         }}
-        data-value="Done"
+        data-value={CardStatus.DONE}
         className="w-full border-l-4 border-[#00CB7D] text-[11px] text-[#424242] font-semibold hover:bg-slate-300"
       >
         Done
@@ -210,7 +211,7 @@ function Sort({ isOpen, handleSort }) {
     >
       <button
         className="w-full border-l-4 border-[#797979] text-[11px] text-[#424242] font-semibold hover:bg-slate-300 "
-        data-value="Default"
+        data-value={CardStatus.DEFAULT}
         onClick={(e) => {
           e.stopPropagation();
           handleSort(e.target.dataset.value);
