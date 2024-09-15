@@ -25,6 +25,7 @@ export default function Home() {
   const [search, setSearch] = useState("");
   const [selectedFilter, SetSelectedFilter] = useState("");
   const [selectedSort, setSelectedSort] = useState("");
+  const [isActive, setIsActive] = useState(false);
 
   useEffect(() => {
     const storedTodos = JSON.parse(localStorage.getItem("cards")) || [];
@@ -115,14 +116,19 @@ export default function Home() {
   }
 
   function handleSearch(value) {
+    setIsActive(true);
     setSearch(value);
+    console.log("search");
   }
 
   function handleFilter(value) {
+    setIsActive(true);
     SetSelectedFilter(value);
+    console.log("bisa");
   }
 
   function handleSort(value) {
+    setIsActive(true);
     setSelectedSort(value);
     console.log(value);
   }
@@ -135,9 +141,9 @@ export default function Home() {
           selectedFilter === card.status)
     )
     .sort((a, b) =>
-      sort === "A - Z"
+      selectedSort === "A - Z"
         ? a.title.localeCompare(b.title)
-        : sort === "Z - A"
+        : selectedSort === "Z - A"
         ? b.title.localeCompare(a.title)
         : 0
     );
@@ -180,7 +186,7 @@ export default function Home() {
       </Features>
       <Main
         openCard={openCard}
-        cards={filteredAndSortedCards}
+        cards={isActive ? filteredAndSortedCards : cards}
         onDeleteItem={handleDeleteItem}
         handleEdit={handleEdit}
       />

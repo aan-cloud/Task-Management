@@ -10,16 +10,8 @@ export default function Features({
   handleFilter,
   handleSort,
 }) {
-  const [isOpenFilter, setIsOpenFilter] = useState(false);
-  const [isOpenSort, setIsOpenSort] = useState(false);
-  const [valueSearch, setValueSearch] = useState("");
-
   function handleform() {
     openForm();
-  }
-
-  function handleValueSearch(e) {
-    e.key === "Enter" && handleSearch(valueSearch);
   }
 
   return (
@@ -53,99 +45,14 @@ export default function Features({
           </svg>
 
           <input
-            onChange={(e) => setValueSearch(e.target.value)}
-            onKeyDown={handleValueSearch}
+            onChange={(e) => handleSearch(e.target.value)}
             type="search"
             placeholder="Search"
             className=" w-full bg-transparent text-black outline-none text-[13px]  placeholder:text-[#656565] "
           />
         </div>
-        <div
-          id="filter"
-          className="flex items-center flex-col justify-center"
-          onMouseOver={() => setIsOpenFilter(true)}
-          onMouseOut={() => setIsOpenFilter(false)}
-        >
-          <div className="flex items-center justify-center">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="size-[22px] font-normal text-[#656565] "
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M12 3c2.755 0 5.455.232 8.083.678.533.09.917.556.917 1.096v1.044a2.25 2.25 0 0 1-.659 1.591l-5.432 5.432a2.25 2.25 0 0 0-.659 1.591v2.927a2.25 2.25 0 0 1-1.244 2.013L9.75 21v-6.568a2.25 2.25 0 0 0-.659-1.591L3.659 7.409A2.25 2.25 0 0 1 3 5.818V4.774c0-.54.384-1.006.917-1.096A48.32 48.32 0 0 1 12 3Z"
-              />
-            </svg>
-            <p className="text-[17px] font-semibold text-[#656565] mx-[5px] ">
-              Filter
-            </p>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="size-5 text-[#656565]"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="m19.5 8.25-7.5 7.5-7.5-7.5"
-              />
-            </svg>
-          </div>
-          {isOpenFilter && (
-            <Filter isOpen={setIsOpenFilter} handleFilter={handleFilter} />
-          )}
-        </div>
-        <div
-          id="sort"
-          className="flex items-center justify-center"
-          onMouseOver={() => setIsOpenSort(true)}
-          onMouseOut={() => setIsOpenSort(false)}
-        >
-          <div className="flex justify-center items-center">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="size-[22px] font-normal text-[#656565]"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M10.5 6h9.75M10.5 6a1.5 1.5 0 1 1-3 0m3 0a1.5 1.5 0 1 0-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-9.75 0h9.75"
-              />
-            </svg>
-            <p className="text-[17px] font-semibold text-[#656565] mx-[5px]">
-              Sort
-            </p>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="size-5 text-[#656565]"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="m19.5 8.25-7.5 7.5-7.5-7.5"
-              />
-            </svg>
-          </div>
-          {isOpenSort && (
-            <Sort isOpen={setIsOpenSort} handleSort={handleSort} />
-          )}
-        </div>
+        <Filter handleFilter={handleFilter} />
+        <Sort handleSort={handleSort} />
       </section>
     </>
   );
@@ -153,92 +60,35 @@ export default function Features({
 
 function Filter({ handleFilter }) {
   return (
-    <div
+    <select
+      name="filter"
       id="filter"
-      className="w-[100px] h-[110px] border rounded-md px-4 fixed top-[186px] z-20 bg-[#ebebeb] shadow-md gap-1 flex flex-col items-center justify-center transition-all"
+      onChange={(e) => {
+        handleFilter(e.target.value);
+      }}
+      className="text-center block w-40 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
     >
-      <button
-        onClick={(e) => {
-          e.stopPropagation();
-          handleFilter(e.target.dataset.value);
-        }}
-        data-value={CardStatus.DEFAULT}
-        className="w-full border-l-4 border-[#696969]  text-[11px] text-[#424242] font-semibold hover:bg-slate-300"
-      >
-        Default
-      </button>
-      <button
-        onClick={(e) => {
-          e.stopPropagation();
-          handleFilter(e.target.dataset.value);
-        }}
-        data-value={CardStatus.NOT_YET}
-        className="w-full border-l-4 border-[#F7093B]  text-[11px] text-[#424242] font-semibold hover:bg-slate-300"
-      >
-        Not Yet
-      </button>
-      <button
-        onClick={(e) => {
-          e.stopPropagation();
-          handleFilter(e.target.dataset.value);
-        }}
-        data-value={CardStatus.ON_PROCESS}
-        className="w-full border-l-4 border-[#FFA732] text-[11px] text-[#424242] font-semibold hover:bg-slate-300"
-      >
-        Process
-      </button>
-      <button
-        onClick={(e) => {
-          e.stopPropagation();
-          handleFilter(e.target.dataset.value);
-        }}
-        data-value={CardStatus.DONE}
-        className="w-full border-l-4 border-[#00CB7D] text-[11px] text-[#424242] font-semibold hover:bg-slate-300"
-      >
-        Done
-      </button>
-    </div>
+      <option value={CardStatus.DEFAULT} defaultValue={CardStatus.DEFAULT}>
+        Filter Default
+      </option>
+      <option value={CardStatus.NOT_YET}>Not Yet</option>
+      <option value={CardStatus.ON_PROCESS}>On Process</option>
+      <option value={CardStatus.DONE}>Done</option>
+    </select>
   );
 }
 
-function Sort({ isOpen, handleSort }) {
+function Sort({ handleSort }) {
   return (
-    <div
-      id="filter"
-      className="w-[100px] h-[80px] border rounded-md px-4 bg-[#ebebeb] fixed top-[186px] z-20 shadow-md gap-1  flex flex-col items-center justify-center transition-all"
-      onMouseOver={() => isOpen(true)}
-      onMouseOut={() => isOpen(false)}
+    <select
+      name="sort"
+      id="sort"
+      onChange={(e) => handleSort(e.target.value)}
+      className="text-center block w-40 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
     >
-      <button
-        className="w-full border-l-4 border-[#797979] text-[11px] text-[#424242] font-semibold hover:bg-slate-300 "
-        data-value={CardStatus.DEFAULT}
-        onClick={(e) => {
-          e.stopPropagation();
-          handleSort(e.target.dataset.value);
-        }}
-      >
-        Default
-      </button>
-      <button
-        className="w-full border-l-4 border-[#00CB7D] text-[11px] text-[#424242] font-semibold hover:bg-slate-300 "
-        data-value="A - Z"
-        onClick={(e) => {
-          e.stopPropagation();
-          handleSort(e.target.dataset.value);
-        }}
-      >
-        A - Z
-      </button>
-      <button
-        className="w-full border-l-4 border-[#F7093B] text-[11px] text-[#424242] font-semibold hover:bg-slate-300 "
-        data-value="Z - A"
-        onClick={(e) => {
-          e.stopPropagation();
-          handleSort(e.target.dataset.value);
-        }}
-      >
-        Z - A
-      </button>
-    </div>
+      <option value="Default">Sort Default</option>
+      <option value="A - Z">A To Z</option>
+      <option value="Z - A">Z To A</option>
+    </select>
   );
 }
